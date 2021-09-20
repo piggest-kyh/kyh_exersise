@@ -1,102 +1,78 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Random;
 
 class Scratch {
     public static void main(String[] args) {
 
-        ArrayList<Integer> testArray = new ArrayList<>();
-//        a
+    int[] ranArray = new int[10];
 
-        printArray(fill0to10(testArray));
-//        b
-        printArray(fillEvenNumbers(testArray));
-//        c
-        printArray(fillSqurNum(testArray));
-//        d
-        printArray(fillWithZeros(testArray));
-//        e
-        printArray(fillWithRandom(testArray));
-//        f.
-        printArray(fillWith0And1(testArray));
-//        g
-        printArray(fillTwiceFrom0to4(testArray));
+    ranArray = fillArray(ranArray);
 
+    System.out.println(Arrays.toString(ranArray));
+
+    printNumWithEvenIndex(ranArray);
+
+    printEvenNumInArray(ranArray);
+
+    printElementsInReverseOrder(ranArray);
+
+    printFirstAndLastElement(ranArray);
 
     }
 
-    private static ArrayList<Integer> fillTwiceFrom0to4(ArrayList<Integer> testArray) {
+    private static void printFirstAndLastElement(int[] arr) {
+        StringBuilder sb = new StringBuilder();
 
-        int counter = 2;
+        sb.append(arr[0]).append(" ").append(arr[arr.length - 1]).append(" ");
 
-        do{
-            for (int i = 0; i < 5; i++) {
-                testArray.add(i);
+        System.out.println(sb.toString());
+    }
+
+    private static void printElementsInReverseOrder(int[] ranArray) {
+        int j = ranArray.length;
+        int[] reverseArray = new int[10];
+        for (int i = 0; i < ranArray.length; i++) {
+            reverseArray[j - 1] = ranArray[i];
+            j = j - 1;
+        }
+        System.out.println(Arrays.toString(reverseArray));
+    }
+
+    private static void printEvenNumInArray(int[] arr) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i]%2 == 0){sb.append(arr[i]+ " ");};
+        }
+        System.out.println(sb.toString());
+    }
+
+    private static void printNumWithEvenIndex(int[] arr) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arr.length; i+=2) {
+            sb.append(arr[i] + " ");
+        }
+        System.out.println(sb.toString());
+    }
+
+    private static int[] fillArray(int[] numArray) {
+
+        for (int i = 0; i < numArray.length; i++) {
+            int randomInt = getRandomInt();
+            for (int j = 0; j <=i; j++) {
+                if (randomInt == numArray[i]) {
+                    numArray[i] = getRandomInt();
+                } else {
+                    numArray[i] = randomInt;
+                }
             }
-            counter--;
-        } while (counter > 0);
-        return testArray;
-    }
-
-    private static ArrayList<Integer> fillWith0And1(ArrayList<Integer> testArray) {
-
-        boolean state = true;
-
-        for (int i = 0; i < 10; i++) {
-            if(state) {
-                testArray.add(0);
-                state = false;
-            } else {
-                testArray.add(1);
-                state = true;
-            }
         }
-
-        return testArray;
+        return numArray;
     }
 
-    private static ArrayList<Integer> fillWithRandom(ArrayList<Integer> testArray) {
-
-        List<Integer> list = Arrays.asList(1,4,9,16,9,7,4,9,11);
-        testArray.addAll(list);
-        return testArray;
+    private static int getRandomInt() {
+        Random rn = new Random();
+        int ubound = 30;
+//        int randNegOrPos = rn.nextInt(ubound) * (rn .nextBoolean() ? -1 : 1);
+        return rn.nextInt(ubound);
     }
-
-    private static ArrayList<Integer> fillWithZeros(ArrayList<Integer> testArray) {
-        for (int i = 0; i < 10; i++) {
-            testArray.add(0);
-        }
-
-        return testArray;
-    }
-
-    private static ArrayList<Integer> fillSqurNum(ArrayList<Integer> testArray) {
-        for (int i = 0; i < 10; i++) {
-            testArray.add((int) Math.pow((i+1), 2));
-        }
-
-        return testArray;
-    }
-
-    private static ArrayList<Integer> fillEvenNumbers(ArrayList<Integer> testArray) {
-        for (int i = 1; i < 20; i += 2) {
-            testArray.add(i+1);
-        }
-        return testArray;
-    }
-
-    private static void printArray(ArrayList<Integer> testArray) {
-        System.out.println(testArray.toString());
-        testArray.clear();
-    }
-
-    private static ArrayList<Integer> fill0to10(ArrayList<Integer> testArray) {
-        for (int i = 0; i < 10; i++) {
-            testArray.add(i+1);
-        }
-
-        return testArray;
-    }
-
-
 }
