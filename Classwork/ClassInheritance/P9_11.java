@@ -19,11 +19,11 @@ class BetterRectangle extends Rectangle{
         super.setSize(width,height);
     }
 
-    public int getPerimeter(){
+    int getPerimeter(){
         return (x+y)*2;
     }
 
-    public int getArea(){
+    int getArea(){
         return x*y;
     }
 }
